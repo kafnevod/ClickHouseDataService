@@ -33,7 +33,8 @@ ClickHouse обеспечиает эффективную работу с "бол
 
   * Начальный запрос `SELECT` должен формироваться для "большой" таблицы  и использовать оператор `IN` 
   для выборки записей из большой таблицы  с последующим соединением выбранных записей с требуемыми спавочными таблицами.
-  
+
+- В качестве справочных таблиц может быть использованы справочники ClickHouse, представлящие собой синхронизируемые копии справочных таблиц других баз данных (Postgres, MySQ:, MSSQL, Oracle, ...). В этом случае в качнестве UUID'ов используются поля типа Int64. Необходимо поддержать возможность использования такого типа ссылочных полей.
  
  ## Формирование запроса SELET к "большой" таблице
  
@@ -42,3 +43,103 @@ ClickHouse обеспечиает эффективную работу с "бол
  Рассмотрим аггрегацию трех классов:
  ![Пример аггрегации трех классов](/images/joinClassExample.png)
  
+Рассмотрим запрос выборки полей таблицы `BigTable`, в которых поле `colimnA` таблицы `dictC` содержит слово 'Perm'.
+В резулттате необходимо вывести поля:
+- BigTable.columnA;
+- dicktA.columnC;
+- dictB.columnA;
+- dictB.columnB.
+
+Стандартно сформированный запрос выглядит следующим образом:
+```
+select
+ "BigTable"."columnA",
+ "dicktA"."columnC",
+ "dictB"."columnA",
+ "dictB"."columnB"
+from (
+ select
+  "BigTable"."columnA",
+  "BigTable"."linkDictA"
+ from "BigTable"
+) as "BigTable"
+
+join (
+ select
+  "dictA"."primaryKey",
+  "dictA"."columnC",
+  "dictA"."linkDictB"
+ from "dictA"
+) as "dictA" ON "BigTable"."linkDictA" = "dictA"."primaryKey"
+
+join (
+ select
+  "DictB"."primaryKey",
+  "DictB"."columnA",
+  "DictB"."columnB"
+  from "DictB"
+) as "DictB" ON "dictA"."linkDictB" = "dictB"."primaryKey"
+WHERE "DictB"."columnA" = 'Perm'
+```
+
+> Обратите внимание, что в подзапросах вместо полных таблиц  необходимо использовать выборки минимально необходимых столбцов `SELECT` соединяемых таблиц.
+
+Данные запросы в ClickHouse и Postgres выполняются достаточно долго, так как в соединении принимают участи 
+все записи `BigTable`.
+
+Для оптимизаии времени выполнения необходимо 
+- сначала выбрать оператором `IN` необходимые строки и столбцы `BigTable`
+- выбранную подтаблицу соединить со справочниками.
+
+Оптимизированный запрос должен выглядеть так:
+```
+select
+ "BigTable"."columnA",
+ "dicktA"."columnC",
+ "dictB"."columnA",
+ "dictB"."columnB"
+from (
+ select
+  "BigTable"."columnA",
+  "BigTable"."linkDictA"
+ from "BigTable"
+
+ WHERE "BigTable"."linkDictA" IN (
+  SELECT "dictA"."primaryKey"
+  FROM (
+   SELECT
+    "DictB"."primaryKey",
+    "DictB"."columnA",
+   FROM "DictB" WHERE "DictB"."columnA" = 'Perm'
+  ) AS "DictB"
+  JOIN {
+   SELECT
+    "dictA"."primaryKey",
+    "dictA"."linkDictB"
+  ) AS "dictA" ON "dictA"."linkDictB" = "DictB"."primaryKey"
+
+) as "BigTable"
+
+join (
+ select
+  "dictA"."primaryKey",
+  "dictA"."columnC",
+  "dictA"."linkDictB"
+ from "dictA"
+) as "dictA" ON "BigTable"."linkDictA" = "dictA"."primaryKey"
+
+join (
+ select
+  "DictB"."primaryKey",
+  "DictB"."columnA",
+  "DictB"."columnB"
+) as "DictB" ON "dictA"."linkDictB" = "dictB"."primaryKey"
+```
+Операторы подзапроса `IN` выделены большими буквами.
+данные оператиры обеспечивают формирование одностолбцовой таблицы, содержащей 
+идентификаторы строк таблиц словаря `DictA` по которым необходимо сделать выборку 
+строк и столбцов таблицы `BigTable`.
+
+Выбранные строки и столбцы как и в исходном примере соединяются с требуемыми строками и столбцами справочников
+`DictA`, `DictB`.
+
