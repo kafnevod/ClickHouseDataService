@@ -52,7 +52,7 @@ ClickHouse обеспечивает эффективную работу с "бо
 Рассмотрим запрос выборки полей таблицы `BigTable`, в которых поле `colimnA` таблицы `dictC` содержит слово 'Perm'.
 В результате необходимо вывести поля:
 - BigTable.columnA;
-- dicktA.columnC;
+- dictA.columnC;
 - dictB.columnA;
 - dictB.columnB.
 
@@ -60,7 +60,7 @@ ClickHouse обеспечивает эффективную работу с "бо
 ```
 select
  "BigTable"."columnA",
- "dicktA"."columnC",
+ "dictA"."columnC",
  "dictB"."columnA",
  "dictB"."columnB"
 from (
