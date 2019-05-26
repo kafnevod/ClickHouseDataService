@@ -24,7 +24,7 @@ grzevents_BigTable | analythicevents | ФотофиксацияТС
 -------------------|-----------------|----------------
 НомерТС | grz | НомерТС
 Скорость | speed | Скорость
-Источник |  | <span color='red'>Источник</span>
+Источник |  | <span style='color:red'>Источник</span>
 
 
 ## Импортирование табли Postgres как слоаварей Clixkouse
