@@ -22,9 +22,10 @@
 
 grzevents_BigTable | analythicevents | ФотофиксацияТС  
 -------------------|-----------------|----------------
+creator | typeid | creator
 НомерТС | grz | НомерТС
 Скорость | speed | Скорость
-Источник |  | <span style='color:red'>Источник</span>
+Источник |  | Источник
 
 
 ## Импортирование табли Postgres как слоаварей Clixkouse
