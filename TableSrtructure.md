@@ -22,10 +22,30 @@
 
 grzevents_BigTable | analythicevents | ФотофиксацияТС  
 -------------------|-----------------|----------------
+primarykey | ✗ | primarykey
+createtime | ✗ | createtime
 creator | typeid | creator
+edittime | ✗ | edittime
+editor | ✗ | editor
+ОграничениеСкорости | ✗ | ОграничениеСкорости
 НомерТС | grz | НомерТС
 Скорость | speed | Скорость
-Источник |  | Источник
+ОграничениеСкорости | ✗ |  ОграничениеСкорости
+ИдентификаторМатериала | ✗ |  ИдентификаторМатериала
+Время | timestamp | Время
+ДатаПоступления| ✗ |  ДатаПоступления
+Получатель| ✗ |  Получатель
+ТранспортноеСредство| ✗ |  ТранспортноеСредство
+Источник| ✗ |  Получатель
+x | ✗ |  x
+y| ✗ |  y
+ГруппаФакта| ✗ |  ГруппаФакта
+vehicletypetext| ✗ |  vehicletypetext
+vehiclecolortext | ✗ |  vehiclecolortext
+vehiclebrandtext| ✗ |  vehiclebrandtext
+vehiclemodeltext| ✗ |  vehiclemodeltext
+
+
 
 
 ## Импортирование табли Postgres как слоаварей Clixkouse
