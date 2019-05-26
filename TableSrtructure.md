@@ -95,3 +95,10 @@ FROM   grzevents_BigTable
 
 
 ## Импортирование таблиц Postgres как словарей Clixkouse
+
+В состав полей большой деномализованной таблицы не следует включать "справочные" поля - 
+строки наименований объектов и т.п.
+
+В этом случае используются справочные таблицы импортированные из базы данных Postgres.
+В рамках docker-репозитория `Flexberry` создан образ [flexberry/clickhouse-official](https://hub.docker.com/r/flexberry/clickhouse-official)
+[поддерживающий данный функционал](https://github.com/Flexberry/dockerfiles/blob/master/clickhouse/official/README-ru.md).
