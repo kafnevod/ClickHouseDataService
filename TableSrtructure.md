@@ -54,4 +54,4 @@ photo_id } photo_id | ✗
 
 
 
-## Импортирование табли Postgres как слоаварей Clixkouse
+## Импортирование таблиц Postgres как слоаварей Clixkouse
