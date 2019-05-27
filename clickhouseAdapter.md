@@ -1,8 +1,19 @@
 # Заметки по поводу реализации адаптера для ClickHouse в Сокол Аналитика и не только
 
+## Общие 
 
-Python;
-- Дравер - [ClickHouse Python Driver](https://github.com/mymarilyn/clickhouse-driver)
+- kafka:
+    * [Load data from kafka to ClickHouse with high performance](https://github.com/housepower/clickhouse_sinker);
+    
+-  Аналитика
+  * [Pandas interface](https://github.com/kszucs/pandahouse)
+
+Kubernetes:
+  * https://github.com/Altinity/clickhouse-operator
+  
+
+## Python
+- Драйвер - [ClickHouse Python Driver](https://github.com/mymarilyn/clickhouse-driver)
 - Асинхронный сброс буфера поступивших сообщений - http://qaru.site/questions/381762/break-the-function-after-certain-time
 ```
 import signal
@@ -29,3 +40,7 @@ for i in range(3):
         # Reset the alarm
         signal.alarm(0)
 ```
+
+## PHP
+
+- [PHP ClickHouse wrapper](https://github.com/smi2/phpClickHouse);
