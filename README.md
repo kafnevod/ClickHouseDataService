@@ -203,6 +203,10 @@ editor | ✗ | editor
 Время | datetime | Время
 ДатаПоступления| ✗ |  ДатаПоступления
 Получатель| ✗ |  Получатель
+vehicletype | vehicletype | vehicletype
+vehiclecolor | vehiclecolor | vehiclecolor
+vehiclebrand | vehiclebrand | vehiclebrand
+vehiclemodel | vehiclemodel | vehiclemodel
 photo_id | photo_id | ✗
 **Источник** | ✗ |  Источник
 **Оборудование** | ✗ | ✗
@@ -230,8 +234,12 @@ CREATE VIEW odisseyevents (
   photo_id AS  photo_id,
   "КомплексОборудования_Идентификатор" AS object_id,
   "Оборудование_Идентификатор" AS camera_direction_id,
-  "Источник_Идентификатор" AS camera_id
-  )
+  "Источник_Идентификатор" AS camera_id,
+  vehicletype Enum16,
+  vehiclecolor Enum16,
+  vehiclebrand Enum16,
+  vehiclemodel Enum16
+)
 FROM   grzevents_BigTable
 ```
 
@@ -249,7 +257,11 @@ CREATE VIEW "ФотофиксацияТС" (
   Время,
   ДатаПоступления,
   Получатель,
-  Источник
+  Источник,
+  vehicletype Enum16,
+  vehiclecolor Enum16,
+  vehiclebrand Enum16,
+  vehiclemodel Enum16
 )
 FROM   grzevents_BigTable
 ```
