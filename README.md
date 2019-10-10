@@ -189,7 +189,7 @@ ClickHouse поддерживает значения NULL.
 
 Рассмотрим пример большой денормализованной таблицы `grzevents_BigTable`:
 
-grzevents_BigTable | odisseyevents | ФотофиксацияТС  
+grzevents_BigTable (MergeTree) | odisseyevents (View) | ФотофиксацияТС (View)  
 -------------------|-----------------|----------------
 primarykey | ✗ | primarykey
 createtime | ✗ | createtime
