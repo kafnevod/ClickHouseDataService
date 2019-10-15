@@ -46,7 +46,7 @@ ReceivingDate| ✗ |  ДатаПоступления
 Receiver| ✗ |  Получатель
 Vehicle | ✗ |  ТранспортноеСредство
 GroupFact | ✗ | ГруппаФакта
-photo_id | photo_id | ✗
+PhotoId | photo_id | ✗
 **Source** | ✗ |  Источник
 ParkingPlaceNumber | ✗ |  КолвоМест 
 ParkingType | ✗ |  ТипПарковки
