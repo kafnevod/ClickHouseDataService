@@ -24,25 +24,43 @@
 
 grzevents_BigTable (MergeTree)| odisseyevents (View) | ФотофиксацияТС (View)  
 -------------------|-----------------|----------------
-primarykey | ✗ | primarykey
-createtime | ✗ | createtime
-creator | typeid | creator
-edittime | ✗ | edittime
-editor | ✗ | editor
-НомерТС | grz | НомерТС
-Скорость | speed | Скорость
-ОграничениеСкорости | ✗ |  ОграничениеСкорости
-ИдентификаторМатериала | ✗ |  ИдентификаторМатериала
-Время | datetime | Время
-ДатаПоступления| ✗ |  ДатаПоступления
-Получатель| ✗ |  Получатель
+primaryKey | ✗ | primaryKey
+CreateTime | ✗ | CreateTime
+Creator | typeid | Creator
+EditTime | ✗ | EditTime
+Editor | ✗ | Editor
+GRZ | grz | НомерТС
+Speed | speed | Скорость
+MaxSpeed | ✗ |  ОграничениеСкорости
+MaterialId | ✗ |  ИдентификаторМатериала
+VehicleMarkaKey | ✗ | МаркаТСКлюч
+VehicleModelKey | ✗ | МодельТСКлюч
+VehicleColorKey | ✗ | ЦветТСКлюч
+VehicleTypeKey | ✗ | ТипТСКлюч
+VehicleTypeText | ✗ | VehicleTypeText
+VehicleColorText | ✗ | VehicleColorText
+VehicleBrandText | ✗ | VehicleBrandText
+VehicleModelText | ✗ | VehicleModelText
+Time | datetime | Время
+ReceivingDate| ✗ |  ДатаПоступления
+Receiver| ✗ |  Получатель
+Vehicle | ✗ |  ТранспортноеСредство
+GroupFact | ✗ | ГруппаФакта
 photo_id | photo_id | ✗
-**Источник** | ✗ |  Источник
-**Оборудование** | ✗ | ✗
-**КомплексОборудования** | ✗ | ✗
-*КомплексОборудования_Идентификатор* | object_id |  ✗ 
-*Оборудование_Идентификатор* | camera_direction_id |  ✗
-*Источник_Идентификатор* | camera_id |  ✗
+**Source** | ✗ |  Источник
+ParkingPlaceNumber | ✗ |  КолвоМест 
+ParkingType | ✗ |  ТипПарковки
+Location | ✗ | МестоРасположения
+hid | ✗ | hid
+**Equipment** | ✗ | ✗
+**EquipmentComplex** | ✗ | ✗
+*ComplexId* | object_id |  ✗ 
+*FrontGroupId* | camera_direction_id |  ✗
+*CameraId* | camera_id |  ✗
+X | ✗ | X
+Y | ✗ | Y
+SourceName | ✗ | ✗
+Direction | ✗ | ✗
 
 Информация размещенная в данной таблице доступна в виде двух представлений:
 - odisseyevents - представления для системы Сокол-аналитика;
